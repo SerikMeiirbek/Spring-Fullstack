@@ -1,0 +1,21 @@
+server:
+  error:
+    include-message: always
+#    Enabling error message within Http response body
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/amigoscode
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  main:
+    web-application-type: servlet
+
