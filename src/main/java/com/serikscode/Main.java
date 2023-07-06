@@ -1,6 +1,8 @@
 package com.serikscode;
 
 
+import com.github.javafaker.Faker;
+import com.github.javafaker.Name;
 import com.serikscode.customer.Customer;
 import com.serikscode.repository.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -9,7 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 
 @SpringBootApplication
@@ -23,17 +28,22 @@ public class Main {
 
     }
 
-//    @Bean
-//    CommandLineRunner runner(CustomerRepository customerRepository){
-//        return args-> {
-//            Customer alex = new Customer("Alex123", "alex@gmail.com", 21);
-//            Customer jamila = new Customer("Jamila", "jamila@gmail.com", 22);
-//
-//            List<Customer> customers = List.of(alex,jamila);
-//            customerRepository.saveAll(customers);
-//
-//        };
-//    }
+    @Bean
+    CommandLineRunner runner(CustomerRepository customerRepository){
+        return args-> {
+
+            int age = new Random().nextInt(16,99);
+            Faker faker = new Faker();
+            Name name = faker.name();
+            String firstName = name.firstName();
+            String lastName = name.lastName();
+            String email = firstName.toLowerCase()+ "." + lastName.toLowerCase() + "@gmail.com";
+            Customer customer = new Customer(firstName + " " + lastName, email, age);
+
+            customerRepository.save(customer);
+
+        };
+    }
 
 
 
