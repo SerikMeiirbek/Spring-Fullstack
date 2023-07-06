@@ -16,7 +16,7 @@ public class CustomerService {
 
     private final CustomerDao customerDao;
 
-    public CustomerService(@Qualifier("jpa") CustomerDao customerDao) {
+    public CustomerService(@Qualifier("jdbc") CustomerDao customerDao) {
         this.customerDao = customerDao;
     }
 
@@ -57,17 +57,35 @@ public class CustomerService {
     }
 
     public void updateCustomer(Integer id, CustomerRegistrationRequest customerRegistrationRequest) {
-        Customer customer = getCustomerById(id);
+        // TODO: for JPA use .getReferenceById(customerId) as it does does not bring object into memory and instead a reference
+        Customer customer = customerDao.selectCustomerById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "customer with id [%s] not found".formatted(id)
+                ));
+
         boolean changes = false;
 
-        if(customerRegistrationRequest.name() != null && customerRegistrationRequest.email() != null && customerRegistrationRequest.age() != null){
+        if (customerRegistrationRequest.name() != null && !customerRegistrationRequest.name().equals(customer.getName())) {
             customer.setName(customerRegistrationRequest.name());
-            customer.setEmail(customerRegistrationRequest.email());
+            changes = true;
+        }
+
+        if (customerRegistrationRequest.age() != null && !customerRegistrationRequest.age().equals(customer.getAge())) {
             customer.setAge(customerRegistrationRequest.age());
             changes = true;
         }
 
-        if(!changes){
+        if (customerRegistrationRequest.email() != null && !customerRegistrationRequest.email().equals(customer.getEmail())) {
+            if (customerDao.existsPersonWithEmail(customerRegistrationRequest.email())) {
+                throw new DuplicateResourseException(
+                        "email already taken"
+                );
+            }
+            customer.setEmail(customerRegistrationRequest.email());
+            changes = true;
+        }
+
+        if (!changes) {
             throw new RequestValidationException("no data changes found");
         }
 

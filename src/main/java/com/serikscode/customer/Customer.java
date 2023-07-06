@@ -61,7 +61,7 @@ import jakarta.persistence.*;
             return email;
         }
 
-        public int getAge() {
+        public Integer getAge() {
             return age;
         }
 
