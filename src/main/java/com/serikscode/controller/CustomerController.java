@@ -28,7 +28,7 @@ public class CustomerController {
         return customerService.getCustomerById(customerId);
     }
 
-    @PostMapping("/customer")
+    @PostMapping
     public void registerCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest){
         customerService.addCustomer(customerRegistrationRequest);
     }
