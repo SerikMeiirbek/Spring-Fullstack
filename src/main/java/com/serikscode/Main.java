@@ -23,17 +23,17 @@ public class Main {
 
     }
 
-    @Bean
-    CommandLineRunner runner(CustomerRepository customerRepository){
-        return args-> {
-            Customer alex = new Customer("Alex123", "alex@gmail.com", 21);
-            Customer jamila = new Customer("Jamila", "jamila@gmail.com", 22);
-
-            List<Customer> customers = List.of(alex,jamila);
-            customerRepository.saveAll(customers);
-
-        };
-    }
+//    @Bean
+//    CommandLineRunner runner(CustomerRepository customerRepository){
+//        return args-> {
+//            Customer alex = new Customer("Alex123", "alex@gmail.com", 21);
+//            Customer jamila = new Customer("Jamila", "jamila@gmail.com", 22);
+//
+//            List<Customer> customers = List.of(alex,jamila);
+//            customerRepository.saveAll(customers);
+//
+//        };
+//    }
 
 
 

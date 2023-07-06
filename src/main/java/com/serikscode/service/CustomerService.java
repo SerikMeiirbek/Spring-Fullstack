@@ -3,6 +3,7 @@ package com.serikscode.service;
 import com.serikscode.customer.Customer;
 import com.serikscode.customer.CustomerRegistrationRequest;
 import com.serikscode.exception.DuplicateResourseException;
+import com.serikscode.exception.RequestValidationException;
 import com.serikscode.exception.ResourceNotFoundException;
 import com.serikscode.repository.CustomerDao;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -55,4 +56,21 @@ public class CustomerService {
         customerDao.deleteCustomer(id);
     }
 
+    public void updateCustomer(Integer id, CustomerRegistrationRequest customerRegistrationRequest) {
+        Customer customer = getCustomerById(id);
+        boolean changes = false;
+
+        if(customerRegistrationRequest.name() != null && customerRegistrationRequest.email() != null && customerRegistrationRequest.age() != null){
+            customer.setName(customerRegistrationRequest.name());
+            customer.setEmail(customerRegistrationRequest.email());
+            customer.setAge(customerRegistrationRequest.age());
+            changes = true;
+        }
+
+        if(!changes){
+            throw new RequestValidationException("no data changes found");
+        }
+
+        customerDao.updateCustomer(customer);
+    }
 }

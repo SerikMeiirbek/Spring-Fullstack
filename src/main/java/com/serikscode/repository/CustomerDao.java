@@ -1,6 +1,7 @@
 package com.serikscode.repository;
 
 import com.serikscode.customer.Customer;
+import com.serikscode.customer.CustomerRegistrationRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,4 +14,6 @@ public interface CustomerDao {
     boolean existsPersonWithEmail(String email);
     boolean existsPersonWithId(Integer id);
     void deleteCustomer(Integer id);
+
+    void updateCustomer(Customer updatedCustomer);
 }

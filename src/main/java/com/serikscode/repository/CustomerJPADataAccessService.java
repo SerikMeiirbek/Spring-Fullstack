@@ -1,6 +1,7 @@
 package com.serikscode.repository;
 
 import com.serikscode.customer.Customer;
+import com.serikscode.customer.CustomerRegistrationRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -43,6 +44,11 @@ public class CustomerJPADataAccessService implements CustomerDao{
     @Override
     public void deleteCustomer(Integer id) {
         customerRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateCustomer(Customer updatedCustomer) {
+        customerRepository.save(updatedCustomer);
     }
 
 
