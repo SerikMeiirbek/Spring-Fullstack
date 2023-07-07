@@ -4,7 +4,6 @@ import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import com.serikscode.customer.Customer;
 import com.serikscode.customer.CustomerRegistrationRequest;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
