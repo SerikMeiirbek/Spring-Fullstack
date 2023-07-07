@@ -1,6 +1,6 @@
 services:
-  db:
-    container_name: postgres
+  postgres:
+    container_name: postgresFSD
     image: postgres
     environment:
       POSTGRES_USER: amigoscode
@@ -13,8 +13,9 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+
   pgadmin:
-    container_name: pgadmin
+    container_name: pgadminFSD
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
@@ -27,8 +28,6 @@ services:
     networks:
       - postgres
     restart: unless-stopped
-    depends_on:
-      - db
 
 networks:
   postgres:

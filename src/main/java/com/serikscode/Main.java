@@ -10,10 +10,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-
-import java.nio.charset.Charset;
-import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 
@@ -45,26 +41,5 @@ public class Main {
         };
     }
 
-
-
-
-
-
-
-
-
-    @Bean
-    public Foo getFoo(){
-        return new Foo("bar");
-    }
-
-    record Foo(String name){}
-
-    public static void printBeans(ConfigurableApplicationContext ctx){
-        String[] beanDefinitionNames = ctx.getBeanDefinitionNames();
-        for (String beanDefinitionName : beanDefinitionNames) {
-            System.out.println(beanDefinitionName);
-        }
-    }
 
 }
