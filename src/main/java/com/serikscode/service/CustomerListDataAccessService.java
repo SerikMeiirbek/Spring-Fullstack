@@ -1,6 +1,7 @@
-package com.serikscode.repository;
+package com.serikscode.service;
 
 import com.serikscode.customer.Customer;
+import com.serikscode.repository.CustomerDao;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

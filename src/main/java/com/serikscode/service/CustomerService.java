@@ -25,7 +25,8 @@ public class CustomerService {
     }
 
     public Customer getCustomerById(Integer id){
-        return customerDao.selectCustomerById(id).orElseThrow(()-> new ResourceNotFoundException("customer id %s not found".formatted(id)));
+        return customerDao.selectCustomerById(id).orElseThrow(()->
+                new ResourceNotFoundException("customer id %s not found".formatted(id)));
     }
 
     public void addCustomer(CustomerRegistrationRequest customerRegistrationRequest){

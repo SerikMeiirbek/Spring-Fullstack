@@ -1,6 +1,7 @@
-package com.serikscode.repository;
+package com.serikscode.service;
 
 import com.serikscode.customer.Customer;
+import com.serikscode.repository.CustomerDao;
 import com.serikscode.utills.CustomerRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository("jdbc")
-public class CustomerJDBCDataAccessService implements CustomerDao{
+public class CustomerJDBCDataAccessService implements CustomerDao {
 
     private final JdbcTemplate jdbcTemplate;
     private final CustomerRowMapper customerRowMapper;

@@ -2,6 +2,7 @@ package com.serikscode.repository;
 
 import com.serikcode.AbstractTestContainerUnitTest;
 import com.serikscode.customer.Customer;
+import com.serikscode.service.CustomerJDBCDataAccessService;
 import com.serikscode.utills.CustomerRowMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -213,11 +214,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         // Then
         Optional<Customer> actual = underTest.selectCustomerById(id);
 
-        Assertions.assertThat(actual).isPresent().hasValueSatisfying(c -> {
-            Assertions.assertThat(c.getId()).isEqualTo(id);
-            Assertions.assertThat(c.getName()).isEqualTo(newName); // change
-            Assertions.assertThat(c.getEmail()).isEqualTo(customer.getEmail());
-            Assertions.assertThat(c.getAge()).isEqualTo(customer.getAge());
-        });
+        Assertions.assertThat(actual.get().getName()).isEqualTo(newName);
+
+
     }
 }

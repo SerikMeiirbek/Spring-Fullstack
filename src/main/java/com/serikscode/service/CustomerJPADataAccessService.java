@@ -1,14 +1,15 @@
-package com.serikscode.repository;
+package com.serikscode.service;
 
 import com.serikscode.customer.Customer;
-import com.serikscode.customer.CustomerRegistrationRequest;
+import com.serikscode.repository.CustomerDao;
+import com.serikscode.repository.CustomerRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository("jpa")
-public class CustomerJPADataAccessService implements CustomerDao{
+public class CustomerJPADataAccessService implements CustomerDao {
 
     private final CustomerRepository customerRepository;
 
