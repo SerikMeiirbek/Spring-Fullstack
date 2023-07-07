@@ -5,9 +5,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/amigoscode
-    username: postgres
-    password: 1234
+    url: jdbc:postgresql://localhost:5435/amigoscode
+    username: amigoscode
+    password: password
   jpa:
     hibernate:
       ddl-auto: validate

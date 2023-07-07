@@ -38,7 +38,7 @@ public class CustomerJPADataAccessService implements CustomerDao{
 
     @Override
     public boolean existsPersonWithId(Integer id) {
-        return customerRepository.existsById(id);
+        return customerRepository.existsCustomerById(id);
     }
 
     @Override
