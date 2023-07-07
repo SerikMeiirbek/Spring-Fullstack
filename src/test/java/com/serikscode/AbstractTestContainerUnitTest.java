@@ -1,4 +1,4 @@
-package com.serikcode;
+package com.serikscode;
 
 import com.github.javafaker.Faker;
 import org.flywaydb.core.Flyway;

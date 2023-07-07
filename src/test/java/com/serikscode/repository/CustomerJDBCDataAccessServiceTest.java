@@ -1,6 +1,6 @@
 package com.serikscode.repository;
 
-import com.serikcode.AbstractTestContainerUnitTest;
+import com.serikscode.AbstractTestContainerUnitTest;
 import com.serikscode.customer.Customer;
 import com.serikscode.service.CustomerJDBCDataAccessService;
 import com.serikscode.utills.CustomerRowMapper;

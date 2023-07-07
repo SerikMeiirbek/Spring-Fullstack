@@ -1,6 +1,6 @@
 package com.serikscode.repository;
 
-import com.serikcode.AbstractTestContainerUnitTest;
+import com.serikscode.AbstractTestContainerUnitTest;
 import com.serikscode.customer.Customer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
