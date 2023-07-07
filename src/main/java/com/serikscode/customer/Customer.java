@@ -2,6 +2,8 @@ package com.serikscode.customer;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 
 @Entity
 @Table(
@@ -93,11 +95,15 @@ import jakarta.persistence.*;
 
         @Override
         public int hashCode() {
-            return super.hashCode();
+            return Objects.hash(id, name, email, age);
         }
 
         @Override
-        public boolean equals(Object obj) {
-            return super.equals(obj);
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Customer customer = (Customer) o;
+            return Objects.equals(id, customer.id) && Objects.equals(name, customer.name) && Objects.equals(email, customer.email) && Objects.equals(age, customer.age);
         }
-    }
+
+}
