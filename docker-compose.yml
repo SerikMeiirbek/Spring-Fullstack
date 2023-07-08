@@ -29,6 +29,20 @@ services:
       - postgres
     restart: unless-stopped
 
+  customer-api:
+    container_name: customer-api
+    image: serikmeiirbek/customer-api
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/amigoscode"
+    ports:
+      - "8088:8080"
+    networks:
+      - postgres
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+
 networks:
   postgres:
     driver: bridge
