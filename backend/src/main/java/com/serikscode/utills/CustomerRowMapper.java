@@ -1,7 +1,6 @@
 package com.serikscode.utills;
 
 import com.serikscode.customer.Customer;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 

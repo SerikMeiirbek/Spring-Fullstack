@@ -1,7 +1,6 @@
 package com.serikscode.repository;
 
 import com.serikscode.customer.Customer;
-import com.serikscode.customer.CustomerRegistrationRequest;
 
 import java.util.List;
 import java.util.Optional;
