@@ -30,7 +30,7 @@ public abstract class AbstractTestContainerUnitTest {
 
     @Container
     protected static final PostgreSQLContainer<?> postgreSQLContainer =
-            new PostgreSQLContainer<>("postgres:15")
+            new PostgreSQLContainer<>("postgres:14.7")
                     .withDatabaseName("amigoscode-dao-unit-test")
                     .withUsername("amigoscode")
                     .withPassword("password");
