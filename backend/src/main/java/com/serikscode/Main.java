@@ -19,9 +19,7 @@ public class Main {
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext =
                 SpringApplication.run(Main.class, args);
-
 //        printBeans(applicationContext);
-
     }
 
     @Bean
