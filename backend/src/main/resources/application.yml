@@ -1,12 +1,13 @@
 server:
   error:
     include-message: always
+
 #    Enabling error message within Http response body
 
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5435/amigoscode
-    username: postgres
+    username: amigoscode
     password: password
   jpa:
     hibernate:
@@ -18,6 +19,7 @@ spring:
     show-sql: true
   main:
     web-application-type: servlet
+
 
 
 
