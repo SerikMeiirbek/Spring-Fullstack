@@ -176,6 +176,10 @@
 						<tags>
 							<tag>latest</tag>
 						</tags>
+						<auth>
+							<username>serikmeiirbek</username>
+							<password>Seka22129292#</password>
+						</auth>
 					</to>
 				</configuration>
 				<executions>
