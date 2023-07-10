@@ -11,10 +11,12 @@
 	<groupId>com.serikcode</groupId>
 	<artifactId>customer-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>customer-service</name>
+	<name>customer-api</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
+		<docker.image.name>customer-api</docker.image.name>
+		<docker.image.tag/>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -172,14 +174,7 @@
 						</platforms>
 					</from>
 					<to>
-						<image>serikmeiirbek/${project.artifactId}:${project.version}</image>
-						<tags>
-							<tag>latest</tag>
-						</tags>
-						<auth>
-							<username>serikmeiirbek</username>
-							<password>Seka22129292#</password>
-						</auth>
+						<image>serikmeiirbek/${docker.image.name}:${docker.image.tag}</image>
 					</to>
 				</configuration>
 				<executions>
