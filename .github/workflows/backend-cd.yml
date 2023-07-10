@@ -58,8 +58,10 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: ${{ secrets.EB_APPLICATION_NAME }}
-          environment_name: ${{ secrets.EB_ENVIRONMENT_NAME }}
+          application_name: Customer-service-app-env
+          environment_name: Customer-Service-app
+#          application_name: ${{ secrets.EB_APPLICATION_NAME }}
+#          environment_name: ${{ secrets.EB_ENVIRONMENT_NAME }}
           version_label: ${{ steps.build-number.outputs.BUILD_NUMBER }}
           version_description: ${{github.SHA}}
           region: ${{ secrets.EB_REGION }}
