@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "customer-api",
-      "image": "serikmeiirbek/customer-api:11.07.2023.13.02.54",
+      "image": "serikmeiirbek/customer-api:11.07.2023.13.04.58",
       "essential": true,
       "memory": 512,
       "portMappings": [
