@@ -175,6 +175,10 @@
 					</from>
 					<to>
 						<image>serikmeiirbek/${docker.image.name}:${docker.image.tag}</image>
+						<auth>
+							<username>serikmeiirbek</username>
+							<password>Seka22129292#</password>
+						</auth>
 					</to>
 				</configuration>
 				<executions>
