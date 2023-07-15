@@ -36,12 +36,13 @@ public class CustomerIT {
         String name = fakerName.fullName();
         String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@gmail.com";
         int age = RANDOM.nextInt(1,100);
+        Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
                 name,
                 email,
                 age,
-                Gender.MALE);
+                gender);
 
         // send post request
         webTestClient.post()
@@ -67,7 +68,7 @@ public class CustomerIT {
 
         Customer expectedCustomer = new Customer(
                 name, email, age,
-                Gender.MALE);
+                gender);
 
         // make sure that customer is present
         assertThat(allCustomers)
