@@ -2,6 +2,7 @@ package com.serikscode.utills;
 
 
 import com.serikscode.customer.Customer;
+import com.serikscode.customer.Gender;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
@@ -24,7 +25,7 @@ class CustomerRowMapperTest {
         when(resultSet.getInt("age")).thenReturn(19);
         when(resultSet.getString("name")).thenReturn("Jamila");
         when(resultSet.getString("email")).thenReturn("jamila@gmail.com");
-
+        when(resultSet.getString("gender")).thenReturn("FEMALE");
 
         // When
         Customer actual = customerRowMapper.mapRow(resultSet, 1);
@@ -34,8 +35,8 @@ class CustomerRowMapperTest {
                 1,
                 "Jamila",
                 "jamila@gmail.com",
-                19
-        );
+                19,
+                Gender.FEMALE);
         assertThat(actual).isEqualTo(expected);
     }
 }

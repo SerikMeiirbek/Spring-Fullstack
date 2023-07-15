@@ -2,6 +2,7 @@ package com.serikscode.service;
 
 import com.serikscode.customer.Customer;
 import com.serikscode.customer.CustomerRegistrationRequest;
+import com.serikscode.customer.Gender;
 import com.serikscode.exception.DuplicateResourseException;
 import com.serikscode.exception.RequestValidationException;
 import com.serikscode.exception.ResourceNotFoundException;
@@ -51,8 +52,8 @@ class CustomerServiceTest {
                 id,
                 "Alex",
                 "alex@gmail.com",
-                10
-        );
+                10,
+                Gender.MALE);
 
         Mockito.when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
@@ -86,8 +87,8 @@ class CustomerServiceTest {
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
                 "Alex",
                 email,
-                19
-        );
+                19,
+                Gender.MALE);
 
         when(customerDao.existsPersonWithEmail(email)).thenReturn(false);
 
@@ -117,8 +118,8 @@ class CustomerServiceTest {
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
                 "Alex",
                 email,
-                19
-        );
+                19,
+                Gender.MALE);
 
         //When
         when(customerDao.existsPersonWithEmail(email)).thenReturn(true);
@@ -177,8 +178,8 @@ class CustomerServiceTest {
                 id,
                 "Alex",
                 email,
-                19
-        );
+                19,
+                Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
@@ -186,8 +187,8 @@ class CustomerServiceTest {
         CustomerRegistrationRequest updateRequest = new CustomerRegistrationRequest(
                 "ALexsandro",
                 newEmail,
-                23
-        );
+                23,
+                Gender.MALE);
         when(customerDao.existsPersonWithEmail(newEmail)).thenReturn(false);
 
         //When
@@ -213,16 +214,16 @@ class CustomerServiceTest {
                 id,
                 "Alex",
                 email,
-                19
-        );
+                19,
+                Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
         CustomerRegistrationRequest updateRequest = new CustomerRegistrationRequest(
                 "ALexandro",
                 null,
-                null
-        );
+                null,
+                Gender.MALE);
 
 
         //When
@@ -248,8 +249,8 @@ class CustomerServiceTest {
                 id,
                 "Alex",
                 email,
-                19
-        );
+                19,
+                Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
@@ -257,8 +258,8 @@ class CustomerServiceTest {
         CustomerRegistrationRequest updateRequest = new CustomerRegistrationRequest(
                 null,
                 newEmail,
-                null
-        );
+                null,
+                Gender.MALE);
         when(customerDao.existsPersonWithEmail(newEmail)).thenReturn(false);
 
         //When
@@ -284,8 +285,8 @@ class CustomerServiceTest {
                 id,
                 "Alex",
                 email,
-                19
-        );
+                19,
+                Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
@@ -293,8 +294,8 @@ class CustomerServiceTest {
         CustomerRegistrationRequest updateRequest = new CustomerRegistrationRequest(
                 null,
                 null,
-                23
-        );
+                23,
+                Gender.MALE);
 
         //When
         underTest.updateCustomer(id, updateRequest);
@@ -319,8 +320,8 @@ class CustomerServiceTest {
                 id,
                 "Alex",
                 email,
-                19
-        );
+                19,
+                Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
@@ -328,8 +329,8 @@ class CustomerServiceTest {
         CustomerRegistrationRequest updateRequest = new CustomerRegistrationRequest(
                 null,
                 newEmail,
-                null
-        );
+                null,
+                Gender.MALE);
         when(customerDao.existsPersonWithEmail(newEmail)).thenReturn(true);
 
         //When
@@ -351,8 +352,8 @@ class CustomerServiceTest {
                 id,
                 "Alex",
                 email,
-                19
-        );
+                19,
+                Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
@@ -360,8 +361,8 @@ class CustomerServiceTest {
         CustomerRegistrationRequest updateRequest = new CustomerRegistrationRequest(
                 customer.getName(),
                 customer.getEmail(),
-                customer.getAge()
-        );
+                customer.getAge(),
+                Gender.MALE);
 
 
         //When

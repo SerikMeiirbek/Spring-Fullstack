@@ -2,6 +2,7 @@ package com.serikscode.repository;
 
 import com.serikscode.AbstractTestContainerUnitTest;
 import com.serikscode.customer.Customer;
+import com.serikscode.customer.Gender;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,8 +38,8 @@ class CustomerRepositoryTest extends AbstractTestContainerUnitTest {
         Customer customer = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         //When
         underTest.save(customer);
@@ -69,8 +70,8 @@ class CustomerRepositoryTest extends AbstractTestContainerUnitTest {
         Customer customer1 = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         //When
         underTest.save(customer1);

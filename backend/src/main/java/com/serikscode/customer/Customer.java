@@ -14,96 +14,110 @@ import java.util.Objects;
                         columnNames = "email"
                 )
         })
- public class Customer{
+public class Customer {
 
-        @Id
-        @SequenceGenerator(
-                name = "customer_id_sequence",
-                sequenceName = "customer_id_sequence",
-                allocationSize = 1
-        )
-        @GeneratedValue(
-                strategy = GenerationType.SEQUENCE,
-                generator = "customer_id_sequence")
-        private Integer id;
-        @Column(nullable = false)
-        private String name;
-        @Column(
-                nullable = false
-        )
-        private String email;
-        @Column(nullable = false)
-        private int age;
+    @Id
+    @SequenceGenerator(
+            name = "customer_id_sequence",
+            sequenceName = "customer_id_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "customer_id_sequence")
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
+    @Column(
+            nullable = false
+    )
+    private String email;
+    @Column(nullable = false)
+    private int age;
 
-        public Customer() {
-        }
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
-        public Customer(Integer id, String name, String email, int age) {
-            this.id = id;
-            this.name = name;
-            this.email = email;
-            this.age = age;
-        }
+    public Customer() {
+    }
 
-    public Customer(String name, String email, int age) {
+    public Customer(Integer id, String name, String email, int age, Gender gender) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.age = age;
+        this.gender = gender;
+    }
+
+    public Customer(String name, String email, int age, Gender gender) {
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.gender = gender;
     }
 
     public Integer getId() {
-            return id;
-        }
+        return id;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public String getEmail() {
-            return email;
-        }
+    public String getEmail() {
+        return email;
+    }
 
-        public Integer getAge() {
-            return age;
-        }
+    public Integer getAge() {
+        return age;
+    }
 
-        public void setId(Integer id) {
-            this.id = id;
-        }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setEmail(String email) {
-            this.email = email;
-        }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-        public void setAge(int age) {
-            this.age = age;
-        }
+    public void setAge(int age) {
+        this.age = age;
+    }
 
-        @Override
-        public String toString() {
-            return "Customer{" +
-                    "id=" + id +
-                    ", name='" + name + '\'' +
-                    ", email='" + email + '\'' +
-                    ", age=" + age +
-                    '}';
-        }
+    public Gender getGender() {
+        return gender;
+    }
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(id, name, email, age);
-        }
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Customer customer = (Customer) o;
-            return Objects.equals(id, customer.id) && Objects.equals(name, customer.name) && Objects.equals(email, customer.email) && Objects.equals(age, customer.age);
-        }
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", gender=" + gender +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email, age, gender);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(id, customer.id) && Objects.equals(name, customer.name) && Objects.equals(email, customer.email) && Objects.equals(age, customer.age) && Objects.equals(gender, customer.getGender());
+    }
 
 }

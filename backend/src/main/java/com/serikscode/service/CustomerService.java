@@ -2,6 +2,7 @@ package com.serikscode.service;
 
 import com.serikscode.customer.Customer;
 import com.serikscode.customer.CustomerRegistrationRequest;
+import com.serikscode.customer.Gender;
 import com.serikscode.exception.DuplicateResourseException;
 import com.serikscode.exception.RequestValidationException;
 import com.serikscode.exception.ResourceNotFoundException;
@@ -16,7 +17,7 @@ public class CustomerService {
 
     private final CustomerDao customerDao;
 
-    public CustomerService(@Qualifier("jdbc") CustomerDao customerDao) {
+    public CustomerService(@Qualifier("jpa") CustomerDao customerDao) {
         this.customerDao = customerDao;
     }
 
@@ -40,7 +41,8 @@ public class CustomerService {
                 new Customer(
                         customerRegistrationRequest.name(),
                         customerRegistrationRequest.email(),
-                        customerRegistrationRequest.age()
+                        customerRegistrationRequest.age(),
+                        customerRegistrationRequest.gender()
                 )
         );
 
@@ -83,6 +85,10 @@ public class CustomerService {
                 );
             }
             customer.setEmail(customerRegistrationRequest.email());
+            changes = true;
+        }
+        if (customerRegistrationRequest.gender() != null && !customerRegistrationRequest.gender().equals(customer.getGender())) {
+            customer.setGender(customerRegistrationRequest.gender());
             changes = true;
         }
 

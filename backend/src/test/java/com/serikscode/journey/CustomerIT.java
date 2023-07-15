@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import com.serikscode.customer.Customer;
 import com.serikscode.customer.CustomerRegistrationRequest;
+import com.serikscode.customer.Gender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,8 +40,8 @@ public class CustomerIT {
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
                 name,
                 email,
-                age
-        );
+                age,
+                Gender.MALE);
 
         // send post request
         webTestClient.post()
@@ -65,8 +66,8 @@ public class CustomerIT {
                 .getResponseBody();
 
         Customer expectedCustomer = new Customer(
-                name, email, age
-        );
+                name, email, age,
+                Gender.MALE);
 
         // make sure that customer is present
         assertThat(allCustomers)
@@ -104,8 +105,8 @@ public class CustomerIT {
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
                 name,
                 email,
-                age
-        );
+                age,
+                Gender.MALE);
 
         // send post request
         webTestClient.post()
@@ -170,8 +171,8 @@ public class CustomerIT {
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
                 name,
                 email,
-                age
-        );
+                age,
+                Gender.MALE);
 
         // send post request
         webTestClient.post()
@@ -207,8 +208,8 @@ public class CustomerIT {
         CustomerRegistrationRequest updatedRequest = new CustomerRegistrationRequest(
                 newName,
                 null,
-                null
-        );
+                null,
+                Gender.MALE);
 
 
         // update customer
@@ -232,8 +233,8 @@ public class CustomerIT {
                 .getResponseBody();
 
         Customer expected = new Customer(
-                id, newName, email, age
-        );
+                id, newName, email, age,
+                Gender.MALE);
         assertThat(updatedCustomer).isEqualTo(expected);
     }
 

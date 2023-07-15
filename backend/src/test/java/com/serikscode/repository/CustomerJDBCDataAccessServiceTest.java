@@ -2,6 +2,7 @@ package com.serikscode.repository;
 
 import com.serikscode.AbstractTestContainerUnitTest;
 import com.serikscode.customer.Customer;
+import com.serikscode.customer.Gender;
 import com.serikscode.service.CustomerJDBCDataAccessService;
 import com.serikscode.utills.CustomerRowMapper;
 import org.assertj.core.api.Assertions;
@@ -32,7 +33,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer = new Customer(
                 FAKER.name().firstName(),
                 FAKER.internet().safeEmailAddress() +  "-" + UUID.randomUUID(),
-                20
+                20,
+                Gender.MALE
         );
 
         //When
@@ -51,8 +53,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         //When
         underTest.insertCustomer(customer);
@@ -94,8 +96,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         //When
         underTest.insertCustomer(customer);
@@ -122,8 +124,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer1 = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         //When
         underTest.insertCustomer(customer1);
@@ -140,8 +142,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer1 = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
 
         //When
         underTest.insertCustomer(customer1);
@@ -166,8 +168,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer1 = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20
-        );
+                20,
+                Gender.MALE);
         underTest.insertCustomer(customer1);
         int id = underTest.selectAllCustomer()
                 .stream()
@@ -191,7 +193,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20);
+                20, Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -214,7 +216,11 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         // Then
         Optional<Customer> actual = underTest.selectCustomerById(id);
 
-        Assertions.assertThat(actual.get().getName()).isEqualTo(newName);
+        Assertions.assertThat(actual).isPresent().hasValueSatisfying(updated -> {
+            Assertions.assertThat(updated.getId()).isEqualTo(id);
+            Assertions.assertThat(updated.getGender()).isEqualTo(Gender.MALE);
+            Assertions.assertThat(updated.getName()).isEqualTo(newName);
+        });
 
 
     }

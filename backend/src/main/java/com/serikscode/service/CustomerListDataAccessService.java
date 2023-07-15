@@ -1,6 +1,7 @@
 package com.serikscode.service;
 
 import com.serikscode.customer.Customer;
+import com.serikscode.customer.Gender;
 import com.serikscode.repository.CustomerDao;
 import org.springframework.stereotype.Repository;
 
@@ -17,8 +18,8 @@ public class CustomerListDataAccessService implements CustomerDao {
 
         //db
         customers = new ArrayList<>();
-        Customer alex = new Customer(1, "Alex", "alex@gmail.com", 21);
-        Customer jamila = new Customer(2, "Jamila", "jamila@gmail.com", 22);
+        Customer alex = new Customer(1, "Alex", "alex@gmail.com", 21, Gender.MALE);
+        Customer jamila = new Customer(2, "Jamila", "jamila@gmail.com", 22, Gender.FEMALE);
         customers.add(alex);
         customers.add(jamila);
 
