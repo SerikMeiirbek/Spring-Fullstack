@@ -30,6 +30,11 @@ jobs:
         working-directory: ./backend
 
     steps:
+#      - name: Slack commit message and sha
+#        run: >
+#          curl -X POST -H 'Content-type: application/json'
+#          --data '{"text":":github: https://github.com/amigoscode/spring-boot-full-stack/commit/${{ github.sha }} - ${{ github.event.head_commit.message }}"}'
+#          ${{ secrets.SLACK_WEBHOOK_URL }}
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GIT_TOKEN }}
