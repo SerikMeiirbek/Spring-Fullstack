@@ -16,7 +16,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<docker.image.name>customer-api</docker.image.name>
-		<docker.image.tag/>
+		<docker.image.tag>latest</docker.image.tag>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -175,6 +175,10 @@
 					</from>
 					<to>
 						<image>serikmeiirbek/${docker.image.name}:${docker.image.tag}</image>
+						<auth>
+							<username>serikmeiirbek</username>
+							<password>Seka22129292#</password>
+						</auth>
 					</to>
 				</configuration>
 				<executions>
