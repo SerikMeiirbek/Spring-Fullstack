@@ -2,7 +2,10 @@ server:
   error:
     include-message: always
 
-#    Enabling error message within Http response body
+
+cors:
+  allowed-origins: "*"
+  allowed-methods: "*"
 
 spring:
   datasource:
