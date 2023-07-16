@@ -9,21 +9,32 @@ import SidebarWithHeader from "./components/shared/SideBar.jsx";
 import { useEffect, useState } from "react";
 import {getCustomers} from "./services/client.js";
 import CardWithImage from "./components/Card";
+import DrawerForm from "./components/DrawerForm.jsx";
+import {errorNotification} from "./services/notification.js";
 const App = () => {
 
     const[customers, setCustomer] = useState([]);
     const[loading, setLoading] = useState(false);
+    const[err, setError] = useState("");
 
-    useEffect(()=>{
+    const fetchCustomers = () =>{
         setLoading(true);
-
         getCustomers().then(res => {
             setCustomer(res.data);
         }).catch(err => {
+            setError(err.data.message)
+            errorNotification(
+                err.code,
+                err.response.data.message
+            )
             console.log(err)
         }).finally(() => {
             setLoading(false);
         })
+    }
+
+    useEffect(()=>{
+        fetchCustomers();
     },[]);
 
     if(loading){
@@ -40,22 +51,42 @@ const App = () => {
         )
     }
 
-    if(customers.length <= 0){
+    if(err){
         return (
             <SidebarWithHeader>
-                <Text>No customers available</Text>
+                <DrawerForm
+                    fetchCustomers = {fetchCustomers}
+                />
+                <Text mt={"5px"}>Oops there was an error</Text>
             </SidebarWithHeader>
         )
     }
 
+    if(customers.length <= 0){
+        return (
+            <SidebarWithHeader>
+                <DrawerForm
+                    fetchCustomers = {fetchCustomers}
+                />
+                <Text mt={"5px"}>No customers available</Text>
+            </SidebarWithHeader>
+        )
+    }
+
+
+
     return (
         <SidebarWithHeader>
+            <DrawerForm
+                fetchCustomers = {fetchCustomers}
+            />
             <Wrap justify = {"center"} spacing = {"20px"}>
                 {customers.map((customer, index) => (
                     <WrapItem key = {index}>
                         <CardWithImage
                             {... customer}
                             imageNumber={index}
+                            fetchCustomers = {fetchCustomers}
                         />
                     </WrapItem>
                 ))}

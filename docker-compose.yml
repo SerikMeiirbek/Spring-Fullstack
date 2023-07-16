@@ -31,7 +31,7 @@ services:
 
   customer-api:
     container_name: customer-api
-    image: serikmeiirbek/customer-api
+    image: serikmeiirbek/customer-api:15.07.2023.21.12.45
     environment:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/amigoscode"
     ports:
