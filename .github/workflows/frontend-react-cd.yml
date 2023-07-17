@@ -41,7 +41,7 @@ jobs:
           REPO=customer-react \
           TAG=${{ steps.build-number.outputs.BUILD_NUMBER }} \
           ../../.ci/build-publish.sh . \
-            --build-arg api_base_url=http://54.162.22.183:8080
+            --build-arg api_base_url=customer-api-app-env.eba-wj9rqf6f.us-east-1.elasticbeanstalk.com:8080
 
       - name: Update Dockerrun.aws.json react image tag with new build number
         run: |
