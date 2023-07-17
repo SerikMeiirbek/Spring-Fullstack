@@ -32,7 +32,7 @@ services:
 
   customer-api:
     container_name: customer-api
-    image: serikmeiirbek/customer-api:17.07.2023.17.29.42
+    image: serikmeiirbek/customer-api:17.07.2023.22.22.41
     environment:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/amigoscode"
     ports:
@@ -47,7 +47,7 @@ services:
 
   customer-react:
     container_name: customer-react
-    image: serikmeiirbek/customer-react:17.07.2023.21.41.14
+    image: serikmeiirbek/customer-react:17.07.2023.21.48.05
     build:
       context: frontend/react
       args:
