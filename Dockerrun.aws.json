@@ -2,13 +2,28 @@
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
+      "name": "customer-react",
+      "image": "serikmeiirbek/customer-react:latest",
+      "essential": true,
+      "memory": 256,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 5173
+        }
+      ]
+
+    }
+  ],
+  "containerDefinitions": [
+    {
       "name": "customer-api",
       "image": "serikmeiirbek/customer-api:15.07.2023.21.12.45",
       "essential": true,
       "memory": 512,
       "portMappings": [
         {
-          "hostPort": 80,
+          "hostPort": 8080,
           "containerPort": 8080
         }
       ],
