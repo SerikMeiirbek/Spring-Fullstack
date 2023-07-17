@@ -31,8 +31,8 @@ jobs:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_ACCESS_TOKEN}}
 
-      - name: Build Package Push With Maven
-        run: mvn -ntp -B verify -Ddocker.image.tag=${{steps.build-number.outputs.BUILD_NUMBER}} jib:build
+#      - name: Build Package Push With Maven
+#        run: mvn -ntp -B verify -Ddocker.image.tag=${{steps.build-number.outputs.BUILD_NUMBER}} jib:build
 
       - name: Docker Build and push
         run: |
