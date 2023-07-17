@@ -12,7 +12,7 @@ import CreateCustomerForm from "./createCustomerForm.jsx";
 const AddIcon = () => "+";
 const CloseIcon = () => "x";
 
-const DrawerForm = ({ fetchCustomers }) => {
+const CreateDrawerForm = ({ fetchCustomers }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     return <>
@@ -51,6 +51,6 @@ const DrawerForm = ({ fetchCustomers }) => {
 
 }
 
-export default DrawerForm;
+export default CreateDrawerForm;
 
 

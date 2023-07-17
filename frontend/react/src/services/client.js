@@ -29,12 +29,11 @@ export const deleteCustomer = async (id) => {
     }
 }
 
-export const updateCustomer = async (id, customer) =>{
+export const updateCustomer = async (id, upodate) =>{
     try{
         return await axios.put(
-            customer,
-            `${import.meta.env.VITE_API_BASE_URL}/api/v1/customers/${id}`
-
+            `${import.meta.env.VITE_API_BASE_URL}/api/v1/customers/${id}`,
+              upodate
         )
     }catch (e){
         throw e;
