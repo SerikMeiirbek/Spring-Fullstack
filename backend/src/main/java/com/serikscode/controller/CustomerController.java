@@ -2,7 +2,10 @@ package com.serikscode.controller;
 
 import com.serikscode.customer.Customer;
 import com.serikscode.customer.CustomerRegistrationRequest;
+import com.serikscode.jwt.JWTUtil;
 import com.serikscode.service.CustomerService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,10 +14,13 @@ import java.util.List;
 @RequestMapping("api/v1/customers")
 public class CustomerController {
 
-    private final CustomerService customerService;
 
-    public CustomerController(CustomerService customerService) {
+    private final CustomerService customerService;
+    private final JWTUtil jwtUtil;
+
+    public CustomerController(CustomerService customerService, JWTUtil jwtUtil) {
         this.customerService = customerService;
+        this.jwtUtil = jwtUtil;
     }
 
     //    @RequestMapping(path = "api/v1/customer", method = RequestMethod.GET)
@@ -28,9 +34,14 @@ public class CustomerController {
         return customerService.getCustomerById(customerId);
     }
 
+
     @PostMapping
-    public void registerCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest){
+    public ResponseEntity<?> registerCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest){
         customerService.addCustomer(customerRegistrationRequest);
+        String jwtToken = jwtUtil.issueToken(customerRegistrationRequest.email(), "ROLE_USER");
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, jwtToken)
+                .build();
     }
 
     @DeleteMapping("/{customerId}")
