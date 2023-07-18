@@ -25,7 +25,7 @@ const UpdateCustomerDrawerForm = ({ fetchCustomers, initialValues, customerId })
             }}
             onClick={onOpen}
         >
-            Update customer
+            Update
         </Button>
         <Drawer isOpen={isOpen} onClose={onClose} size={"xl"}>
             <DrawerOverlay />
