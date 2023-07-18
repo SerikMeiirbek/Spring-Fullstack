@@ -39,7 +39,6 @@ services:
       - "8088:8080"
     networks:
       - postgres
-      - app
     depends_on:
       - postgres
     restart: unless-stopped
@@ -47,15 +46,13 @@ services:
 
   customer-react:
     container_name: customer-react
-    image: serikmeiirbek/customer-react:17.07.2023.21.48.05
+    image: serikmeiirbek/customer-react:17.07.2023.21.41.14
     build:
       context: frontend/react
       args:
         api_base_url: http://localhost:8088
     ports:
       - "3000:5173"
-    networks:
-      - app
     depends_on:
       - customer-api
     restart: unless-stopped
