@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "customer-react",
-      "image": "serikmeiirbek/customer-react:18.07.2023.03.04.44",
+      "image": "serikmeiirbek/customer-react:18.07.2023.17.26.17",
       "essential": true,
       "memory": 256,
       "portMappings": [
