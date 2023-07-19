@@ -3,11 +3,13 @@ package com.serikscode.unitTest.service;
 import com.serikscode.customer.Customer;
 import com.serikscode.customer.CustomerRegistrationRequest;
 import com.serikscode.customer.Gender;
+import com.serikscode.dto.CustomerDTO;
 import com.serikscode.exception.DuplicateResourseException;
 import com.serikscode.exception.RequestValidationException;
 import com.serikscode.exception.ResourceNotFoundException;
 import com.serikscode.repository.CustomerDao;
 import com.serikscode.service.CustomerService;
+import com.serikscode.utills.CustomerDTOMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,9 +34,11 @@ class CustomerServiceTest {
     private PasswordEncoder passwordEncoder;
     private CustomerService underTest;
 
+    private CustomerDTOMapper customerDTOMapper = new CustomerDTOMapper();
+
     @BeforeEach
     void setUp() {
-        underTest = new CustomerService(customerDao, passwordEncoder);
+        underTest = new CustomerService(customerDao,  customerDTOMapper, passwordEncoder);
     }
 
     @Test
@@ -61,11 +65,13 @@ class CustomerServiceTest {
 
         Mockito.when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
+        CustomerDTO expected = customerDTOMapper.apply(customer);
+
         //When
-        Customer actual = underTest.getCustomerById(id);
+        CustomerDTO actual = underTest.getCustomerById(id);
 
         //Then
-        assertThat(actual).isEqualTo(customer);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test

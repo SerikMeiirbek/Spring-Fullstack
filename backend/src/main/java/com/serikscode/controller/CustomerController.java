@@ -2,6 +2,7 @@ package com.serikscode.controller;
 
 import com.serikscode.customer.Customer;
 import com.serikscode.customer.CustomerRegistrationRequest;
+import com.serikscode.dto.CustomerDTO;
 import com.serikscode.jwt.JWTUtil;
 import com.serikscode.service.CustomerService;
 import org.springframework.http.HttpHeaders;
@@ -26,12 +27,12 @@ public class CustomerController {
 
     //    @RequestMapping(path = "api/v1/customer", method = RequestMethod.GET)
     @GetMapping
-    public List<Customer> getCustomers(){
+    public List<CustomerDTO> getCustomers(){
         return customerService.getAllCustomer();
     }
 
     @GetMapping("/{customerId}")
-    public Customer getCustomer(@PathVariable("customerId") Integer customerId){
+    public CustomerDTO getCustomer(@PathVariable("customerId") Integer customerId){
         return customerService.getCustomerById(customerId);
     }
 

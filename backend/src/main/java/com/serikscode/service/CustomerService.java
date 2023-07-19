@@ -2,33 +2,44 @@ package com.serikscode.service;
 
 import com.serikscode.customer.Customer;
 import com.serikscode.customer.CustomerRegistrationRequest;
+import com.serikscode.dto.CustomerDTO;
 import com.serikscode.exception.DuplicateResourseException;
 import com.serikscode.exception.RequestValidationException;
 import com.serikscode.exception.ResourceNotFoundException;
 import com.serikscode.repository.CustomerDao;
+import com.serikscode.utills.CustomerDTOMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {
 
     private final CustomerDao customerDao;
+    private final CustomerDTOMapper customerDTOMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public CustomerService(@Qualifier("jpa") CustomerDao customerDao, PasswordEncoder passwordEncoder) {
+
+    public CustomerService(@Qualifier("jpa") CustomerDao customerDao, CustomerDTOMapper customerDTOMapper, PasswordEncoder passwordEncoder) {
         this.customerDao = customerDao;
+        this.customerDTOMapper = customerDTOMapper;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public List<Customer> getAllCustomer(){
-        return  customerDao.selectAllCustomer();
+    public List<CustomerDTO> getAllCustomer(){
+        return  customerDao.selectAllCustomer()
+                .stream()
+                .map(customerDTOMapper)
+                .collect(Collectors.toList());
     }
 
-    public Customer getCustomerById(Integer id){
-        return customerDao.selectCustomerById(id).orElseThrow(()->
+    public CustomerDTO getCustomerById(Integer id){
+        return customerDao.selectCustomerById(id)
+                .map(customerDTOMapper)
+                .orElseThrow(()->
                 new ResourceNotFoundException("customer id %s not found".formatted(id)));
     }
 
