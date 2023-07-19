@@ -1,8 +1,10 @@
-package com.serikscode.repository;
+package com.serikscode.unitTest.repository;
 
 import com.serikscode.AbstractTestContainerUnitTest;
+import com.serikscode.TestConfig;
 import com.serikscode.customer.Customer;
 import com.serikscode.customer.Gender;
+import com.serikscode.repository.CustomerRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Import;
 
 
 import java.util.UUID;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Import({TestConfig.class})
 class CustomerRepositoryTest extends AbstractTestContainerUnitTest {
 
     @Autowired
@@ -38,7 +42,7 @@ class CustomerRepositoryTest extends AbstractTestContainerUnitTest {
         Customer customer = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20,
+                "password", 20,
                 Gender.MALE);
 
         //When
@@ -70,7 +74,7 @@ class CustomerRepositoryTest extends AbstractTestContainerUnitTest {
         Customer customer1 = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20,
+                "password", 20,
                 Gender.MALE);
 
         //When

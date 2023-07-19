@@ -11,7 +11,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.Random;
+import java.util.UUID;
 
 
 @SpringBootApplication
@@ -26,7 +29,7 @@ public class Main {
     }
 
     @Bean
-    CommandLineRunner runner(CustomerRepository customerRepository){
+    CommandLineRunner runner(CustomerRepository customerRepository, PasswordEncoder passwordEncoder){
         return args-> {
 
             int age = new Random().nextInt(16,99);
@@ -40,7 +43,7 @@ public class Main {
             Random random = new Random();
             Gender gender = (random.nextInt(0,2) == 0) ? (gender = Gender.MALE) : (gender = Gender.FEMALE);
 
-            Customer customer = new Customer(firstName + " " + lastName, email, age, gender);
+            Customer customer = new Customer(firstName + " " + lastName, email, passwordEncoder.encode(UUID.randomUUID().toString()), age, gender);
             customerRepository.save(customer);
 
 

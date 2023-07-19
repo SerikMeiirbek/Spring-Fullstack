@@ -13,6 +13,6 @@ public interface CustomerDao {
     boolean existsPersonWithEmail(String email);
     boolean existsPersonWithId(Integer id);
     void deleteCustomer(Integer id);
-
     void updateCustomer(Customer updatedCustomer);
+    Optional<Customer> selectUserByEmail(String email);
 }

@@ -1,8 +1,9 @@
-package com.serikscode.service;
+package com.serikscode.unitTest.service;
 
 import com.serikscode.customer.Customer;
 import com.serikscode.customer.Gender;
 import com.serikscode.repository.CustomerRepository;
+import com.serikscode.service.CustomerJPADataAccessService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,7 +61,7 @@ class CustomerJPADataAccessServiceTest {
         Customer customer = new Customer(
                 "Sam",
                 "same@gmail.com",
-                23,
+                "password", 23,
                 Gender.MALE);
 
         //When
@@ -117,7 +118,7 @@ class CustomerJPADataAccessServiceTest {
         Customer customer = new Customer(
                 "Sam",
                 "same@gmail.com",
-                23,
+                "password", 23,
                 Gender.MALE);
 
         //When

@@ -1,4 +1,4 @@
-package com.serikscode.repository;
+package com.serikscode.unitTest.repository;
 
 import com.serikscode.AbstractTestContainerUnitTest;
 import com.serikscode.customer.Customer;
@@ -33,7 +33,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer = new Customer(
                 FAKER.name().firstName(),
                 FAKER.internet().safeEmailAddress() +  "-" + UUID.randomUUID(),
-                20,
+                "password", 20,
                 Gender.MALE
         );
 
@@ -53,7 +53,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20,
+                "password", 20,
                 Gender.MALE);
 
         //When
@@ -96,7 +96,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20,
+                "password", 20,
                 Gender.MALE);
 
         //When
@@ -124,7 +124,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer1 = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20,
+                "password", 20,
                 Gender.MALE);
 
         //When
@@ -142,7 +142,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer1 = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20,
+                "password", 20,
                 Gender.MALE);
 
         //When
@@ -168,7 +168,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer1 = new Customer(
                 FAKER.name().firstName(),
                 email,
-                20,
+                "password", 20,
                 Gender.MALE);
         underTest.insertCustomer(customer1);
         int id = underTest.selectAllCustomer()
@@ -193,7 +193,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20, Gender.MALE);
+                "password", 20, Gender.MALE);
 
         underTest.insertCustomer(customer);
 

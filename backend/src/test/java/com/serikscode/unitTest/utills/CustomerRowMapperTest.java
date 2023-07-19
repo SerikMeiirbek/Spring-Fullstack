@@ -1,8 +1,9 @@
-package com.serikscode.utills;
+package com.serikscode.unitTest.utills;
 
 
 import com.serikscode.customer.Customer;
 import com.serikscode.customer.Gender;
+import com.serikscode.utills.CustomerRowMapper;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
@@ -35,7 +36,7 @@ class CustomerRowMapperTest {
                 1,
                 "Jamila",
                 "jamila@gmail.com",
-                19,
+                "password", 19,
                 Gender.FEMALE);
         assertThat(actual).isEqualTo(expected);
     }
