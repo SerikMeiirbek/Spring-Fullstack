@@ -2,18 +2,13 @@ package com.serikscode.journey;
 
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
-import com.serikscode.customer.Customer;
 import com.serikscode.customer.CustomerRegistrationRequest;
 import com.serikscode.customer.Gender;
 import com.serikscode.dto.CustomerDTO;
-import com.serikscode.utills.CustomerDTOMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
@@ -32,7 +27,7 @@ public class CustomerIT {
     @Autowired
     private WebTestClient webTestClient;
     private static final Random RANDOM = new Random();
-    private static final String CUSTOMER_URI = "/api/v1/customers";
+    private static final String CUSTOMER_PATH = "/api/v1/customers";
 
     @Test
     void canRegisterACustomer() {
@@ -52,7 +47,7 @@ public class CustomerIT {
 
         // send post request
         String jwtToken = webTestClient.post()
-                .uri(CUSTOMER_URI)
+                .uri(CUSTOMER_PATH)
                 .accept(APPLICATION_JSON)
                 .contentType(APPLICATION_JSON)
                 .body(Mono.just(request), CustomerRegistrationRequest.class)
@@ -66,7 +61,7 @@ public class CustomerIT {
 
         // get all customers
         List<CustomerDTO> allCustomers = webTestClient.get()
-                .uri(CUSTOMER_URI)
+                .uri(CUSTOMER_PATH)
                 .accept(APPLICATION_JSON)
                 .header(AUTHORIZATION, String.format("Bearer %s",jwtToken))
                 .exchange()
@@ -99,7 +94,7 @@ public class CustomerIT {
 
         // get customer by id
         webTestClient.get()
-                .uri(CUSTOMER_URI + "/{id}", id)
+                .uri(CUSTOMER_PATH + "/{id}", id)
                 .accept(APPLICATION_JSON)
                 .header(AUTHORIZATION, String.format("Bearer %s",jwtToken))
                 .exchange()
@@ -135,7 +130,7 @@ public class CustomerIT {
 
         // send post request to create JWT
         String jwtToken = webTestClient.post()
-                .uri(CUSTOMER_URI)
+                .uri(CUSTOMER_PATH)
                 .accept(APPLICATION_JSON)
                 .contentType(APPLICATION_JSON)
                 .body(Mono.just(request), CustomerRegistrationRequest.class)
@@ -149,7 +144,7 @@ public class CustomerIT {
 
         // send post request to create test customer
         webTestClient.post()
-                .uri(CUSTOMER_URI)
+                .uri(CUSTOMER_PATH)
                 .accept(APPLICATION_JSON)
                 .contentType(APPLICATION_JSON)
                 .body(Mono.just(requestTest), CustomerRegistrationRequest.class)
@@ -163,7 +158,7 @@ public class CustomerIT {
 
         // get all customers
         List<CustomerDTO> allCustomers = webTestClient.get()
-                .uri(CUSTOMER_URI)
+                .uri(CUSTOMER_PATH)
                 .accept(APPLICATION_JSON)
                 .header(AUTHORIZATION, String.format("Bearer %s",jwtToken))
                 .exchange()
@@ -182,7 +177,7 @@ public class CustomerIT {
 
         // delete test customer
         webTestClient.delete()
-                .uri(CUSTOMER_URI + "/{id}", id)
+                .uri(CUSTOMER_PATH + "/{id}", id)
                 .accept(APPLICATION_JSON)
                 .header(AUTHORIZATION, String.format("Bearer %s",jwtToken))
                 .exchange()
@@ -191,7 +186,7 @@ public class CustomerIT {
 
         // get customer by id of test customer
         webTestClient.get()
-                .uri(CUSTOMER_URI + "/{id}", id)
+                .uri(CUSTOMER_PATH + "/{id}", id)
                 .accept(APPLICATION_JSON)
                 .header(AUTHORIZATION, String.format("Bearer %s",jwtToken))
                 .exchange()
@@ -218,7 +213,7 @@ public class CustomerIT {
 
         // send post request to create JWT
         String jwtToken = webTestClient.post()
-                .uri(CUSTOMER_URI)
+                .uri(CUSTOMER_PATH)
                 .accept(APPLICATION_JSON)
                 .contentType(APPLICATION_JSON)
                 .body(Mono.just(request), CustomerRegistrationRequest.class)
@@ -233,7 +228,7 @@ public class CustomerIT {
 
         // get all customers
         List<CustomerDTO> allCustomers = webTestClient.get()
-                .uri(CUSTOMER_URI)
+                .uri(CUSTOMER_PATH)
                 .accept(APPLICATION_JSON)
                 .header(AUTHORIZATION, String.format("Bearer %s",jwtToken))
                 .exchange()
@@ -261,7 +256,7 @@ public class CustomerIT {
 
         // update customer
         webTestClient.put()
-                .uri(CUSTOMER_URI + "/{id}", id)
+                .uri(CUSTOMER_PATH + "/{id}", id)
                 .accept(APPLICATION_JSON)
                 .header(AUTHORIZATION, String.format("Bearer %s",jwtToken))
                 .body(Mono.just(updatedRequest), CustomerRegistrationRequest.class)
@@ -271,7 +266,7 @@ public class CustomerIT {
 
         // get customer by id
         CustomerDTO updatedCustomer = webTestClient.get()
-                .uri(CUSTOMER_URI + "/{id}", id)
+                .uri(CUSTOMER_PATH + "/{id}", id)
                 .accept(APPLICATION_JSON)
                 .header(AUTHORIZATION, String.format("Bearer %s",jwtToken))
                 .exchange()
