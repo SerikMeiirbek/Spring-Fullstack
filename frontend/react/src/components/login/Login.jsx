@@ -18,7 +18,6 @@ import {useAuth} from "../context/AuthContext.jsx";
 import {errorNotification} from "../../services/notification.js";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
-// import {useEffect} from "react";
 
 const MyTextInput = ({ label, ...props }) => {
     // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -94,6 +93,7 @@ const LoginForm = () => {
                             disabled={!isValid || isSubmitting}>
                             Login
                         </Button>
+
                     </Stack>
                 </Form>
             )}
@@ -124,6 +124,9 @@ const Login = () => {
                     />
                     <Heading fontSize={'2xl'}>Sign in to your account</Heading>
                     <LoginForm/>
+                    <Link color={"blue.500"} href={"/signup"}>
+                        Dont have an account? Sign up now.
+                    </Link>
                 </Stack>
             </Flex>
             <Flex
