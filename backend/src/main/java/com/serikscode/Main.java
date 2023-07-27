@@ -43,11 +43,9 @@ public class Main {
             Random random = new Random();
             Gender gender = (random.nextInt(0,2) == 0) ? (gender = Gender.MALE) : (gender = Gender.FEMALE);
 
-            Customer customer = new Customer(firstName + " " + lastName, email, passwordEncoder.encode(UUID.randomUUID().toString()), age, gender);
+            Customer customer = new Customer(firstName + " " + lastName, email, passwordEncoder.encode("password"), age, gender);
             customerRepository.save(customer);
-
-
-
+            System.out.println("Email: " + email);
         };
     }
 

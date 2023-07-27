@@ -8,8 +8,8 @@ import {
 import SidebarWithHeader from "./components/shared/SideBar.jsx";
 import { useEffect, useState } from "react";
 import {getCustomers} from "./services/client.js";
-import CardWithImage from "./components/Card";
-import CreateDrawerForm from "./components/CreateDrawerForm.jsx";
+import CardWithImage from "./components/customer/Card.jsx";
+import CreateDrawerForm from "./components/customer/CreateDrawerForm.jsx";
 import {errorNotification} from "./services/notification.js";
 const App = () => {
 

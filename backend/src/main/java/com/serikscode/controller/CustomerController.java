@@ -1,6 +1,5 @@
 package com.serikscode.controller;
 
-import com.serikscode.customer.Customer;
 import com.serikscode.customer.CustomerRegistrationRequest;
 import com.serikscode.dto.CustomerDTO;
 import com.serikscode.jwt.JWTUtil;
