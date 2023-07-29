@@ -57,7 +57,6 @@ const Signup = () => {
             </Flex>
         </Stack>
     );
-    return "Signup"
 }
 
 export default Signup;
