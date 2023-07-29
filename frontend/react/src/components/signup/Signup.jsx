@@ -18,11 +18,11 @@ const Signup = () => {
         <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
             <Flex p={8} flex={1} alignItems={'center'} justifyContent={'center'}>
                 <Stack spacing={4} w={'full'} maxW={'md'}>
-                    <Image
-                        src={"https://user-images.githubusercontent.com/40702606/210880158-e7d698c2-b19a-4057-b415-09f48a746753.png"}
-                        boxSize = {"200px"}
-                        alt = {"My logo"}
-                    />
+                    {/*<Image*/}
+                    {/*    src={"https://user-images.githubusercontent.com/40702606/210880158-e7d698c2-b19a-4057-b415-09f48a746753.png"}*/}
+                    {/*    boxSize = {"200px"}*/}
+                    {/*    alt = {"My logo"}*/}
+                    {/*/>*/}
                     <Heading fontSize={'2xl'}>Register for an account</Heading>
                     <CreateCustomerForm onSuccess={(token) => {
                         localStorage.setItem("access_token", token)
