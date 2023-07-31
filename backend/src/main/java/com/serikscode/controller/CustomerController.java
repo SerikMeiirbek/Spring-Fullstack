@@ -5,8 +5,10 @@ import com.serikscode.dto.CustomerDTO;
 import com.serikscode.jwt.JWTUtil;
 import com.serikscode.service.CustomerService;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -55,5 +57,21 @@ public class CustomerController {
                                @PathVariable("customerId") Integer id,
                                @RequestBody CustomerRegistrationRequest customerRegistrationRequest){
         customerService.updateCustomer(id, customerRegistrationRequest);
+    }
+
+    @PostMapping(
+            value = "/{customerId}/profile-image",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    public void uploadCustomerProfilePicture(
+                                @PathVariable("customerId") Integer customerId,
+                                @RequestParam("file") MultipartFile file){
+        customerService.uploadCustomerProfileImage(customerId, file);
+    }
+
+    @GetMapping( value = "/{customerId}/profile-image")
+    public byte[] getCustomerProfileImage(
+            @PathVariable("customerId") Integer customerId){
+        return customerService.getCustomerProfileImage(customerId);
     }
 }

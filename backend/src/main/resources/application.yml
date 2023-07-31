@@ -2,7 +2,6 @@ server:
   error:
     include-message: always
 
-
 cors:
   allowed-origins: "*"
   allowed-methods: "*"
@@ -14,6 +13,13 @@ management:
     web:
       exposure:
         include: "health, info"
+
+aws:
+  region: us-east-1
+  s3:
+    mock: true
+    buckets:
+      customer: fs-customer-bucket
 
 spring:
   datasource:
@@ -30,7 +36,12 @@ spring:
     show-sql: true
   main:
     web-application-type: servlet
-
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  codec:
+    max-in-memory-size: 10MB
 
 
 

@@ -127,4 +127,23 @@ class CustomerJPADataAccessServiceTest {
         //Then
         verify(customerRepository).save(customer);
     }
+
+    @Test
+    void canUpdateProfileImage() {
+
+        //Given
+        String profileImageId = "222";
+        Integer customerId = 1;
+        Customer customer = new Customer(
+                "Sam",
+                "same@gmail.com",
+                "password", 23,
+                Gender.MALE);
+
+        //When
+        underTest.updateCustomerProfileImageId(profileImageId, customerId);
+
+        //Then
+        verify(customerRepository).updateProfileImageId(profileImageId, customerId);
+    }
 }

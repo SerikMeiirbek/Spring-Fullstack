@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
 
@@ -193,8 +195,11 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                "password", 20, Gender.MALE);
-
+                "password",
+                20,
+                Gender.MALE,
+                null
+        );
         underTest.insertCustomer(customer);
 
         int id = underTest.selectAllCustomer()
@@ -223,5 +228,36 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerUnitTest {
         });
 
 
+    }
+
+    @Test
+    void canUpdateProfileImageId() {
+        // Given
+        String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        Customer customer = new Customer(
+                FAKER.name().fullName(),
+                email,
+                "password", 20,
+                Gender.MALE);
+
+        underTest.insertCustomer(customer);
+
+        int id = underTest.selectAllCustomer()
+                .stream()
+                .filter(c -> c.getEmail().equals(email))
+                .map(Customer::getId)
+                .findFirst()
+                .orElseThrow();
+
+        // When
+        underTest.updateCustomerProfileImageId("2222", id);
+
+        // Then
+        Optional<Customer> customerOptional = underTest.selectCustomerById(id);
+        assertThat(customerOptional)
+                .isPresent()
+                .hasValueSatisfying(
+                        c -> assertThat(c.getProfileImageId()).isEqualTo("2222")
+                );
     }
 }

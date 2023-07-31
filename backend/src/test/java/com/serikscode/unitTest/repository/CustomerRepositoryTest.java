@@ -5,6 +5,7 @@ import com.serikscode.TestConfig;
 import com.serikscode.customer.Customer;
 import com.serikscode.customer.Gender;
 import com.serikscode.repository.CustomerRepository;
+import com.serikscode.s3.S3Service;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 
 
+import java.util.Optional;
 import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -28,10 +32,11 @@ class CustomerRepositoryTest extends AbstractTestContainerUnitTest {
     @Autowired
     private ApplicationContext applicationContext;
 
+
     @BeforeEach
     void setUp() {
         underTest.deleteAll();
-        System.out.println(applicationContext.getBeanDefinitionCount());
+//        System.out.println(applicationContext.getBeanDefinitionCount());
     }
 
     @Test
@@ -49,7 +54,7 @@ class CustomerRepositoryTest extends AbstractTestContainerUnitTest {
         underTest.save(customer);
 
         //Then
-        Assertions.assertThat(underTest.existsCustomerByEmail(email)).isTrue();
+        assertThat(underTest.existsCustomerByEmail(email)).isTrue();
 
     }
 
@@ -63,7 +68,7 @@ class CustomerRepositoryTest extends AbstractTestContainerUnitTest {
         var actual = underTest.existsCustomerByEmail(email);
 
         //Then
-        Assertions.assertThat(actual).isFalse();
+        assertThat(actual).isFalse();
 
     }
 
@@ -88,7 +93,7 @@ class CustomerRepositoryTest extends AbstractTestContainerUnitTest {
                 .orElseThrow();
 
         //Then
-        Assertions.assertThat(underTest.existsCustomerById(id)).isTrue();
+        assertThat(underTest.existsCustomerById(id)).isTrue();
 
     }
 
@@ -101,7 +106,40 @@ class CustomerRepositoryTest extends AbstractTestContainerUnitTest {
         var actual = underTest.existsCustomerById(id);
 
         //Then
-        Assertions.assertThat(actual).isFalse();
+        assertThat(actual).isFalse();
+
+    }
+
+    @Test
+    void canUpdateProfileImageId() {
+        //Given
+        String email = FAKER.internet().safeEmailAddress() +  "-" + UUID.randomUUID();
+        Customer customer = new Customer(
+                FAKER.name().firstName(),
+                email,
+                "password", 20,
+                Gender.MALE);
+
+        underTest.save(customer);
+
+        int id = underTest.findAll()
+                .stream()
+                .filter(c->c.getEmail().equals(email))
+                .map(Customer::getId)
+                .findFirst()
+                .orElseThrow();
+
+        //When
+        underTest.updateProfileImageId("2222", id);
+
+        //Then
+        Optional<Customer> customerOptional = underTest.findById(id);
+        assertThat(customerOptional)
+                .isPresent()
+                .hasValueSatisfying(c -> {
+                    assertThat(c.getProfileImageId())
+                    .isEqualTo("2222");
+        });
 
     }
 
