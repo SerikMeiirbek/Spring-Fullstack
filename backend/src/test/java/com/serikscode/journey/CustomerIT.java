@@ -331,7 +331,7 @@ public class CustomerIT {
         List<CustomerDTO> allCustomers = webTestClient.get()
                 .uri(CUSTOMER_PATH)
                 .accept(APPLICATION_JSON)
-
+                .header(AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
                 .expectStatus()
                 .isOk()
@@ -386,9 +386,7 @@ public class CustomerIT {
         // download image for customer
         byte[] downloadedImage = webTestClient.get()
                 .uri(CUSTOMER_PATH + "/{customerId}/profile-image", customerDTO.id())
-//                .accept(APPLICATION_JSON)
-//                .header(AUTHORIZATION, String.format("Bearer %s", jwtToken))
-                .accept(MediaType.APPLICATION_JSON)
+                .accept(MediaType.IMAGE_JPEG)
                 .exchange()
                 .expectStatus()
                 .isOk()
