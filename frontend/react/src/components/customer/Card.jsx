@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 
 import {useRef} from 'react'
-import {deleteCustomer} from "../../services/client.js";
+import {customerProfilePictureUrl, deleteCustomer} from "../../services/client.js";
 import {errorNotification, successNotification} from "../../services/notification.js";
 import UpdateCustomerDrawerForm from "./UpdateCustomerDrawerForm.jsx";
 
@@ -50,7 +50,8 @@ export default function CardWithImage({id, name, email, age, gender, imageNumber
                     <Avatar
                         size={'xl'}
                         src={
-                            `https://randomuser.me/api/portraits/${randomUserGender}/${imageNumber}.jpg`
+                                customerProfilePictureUrl(id)
+                            // `https://randomuser.me/api/portraits/${randomUserGender}/${imageNumber}.jpg`
                         }
                         alt={'Author'}
                         css={{

@@ -16,10 +16,8 @@ import java.util.List;
 @RequestMapping("api/v1/customers")
 public class CustomerController {
 
-
     private final CustomerService customerService;
     private final JWTUtil jwtUtil;
-
 
     public CustomerController(CustomerService customerService, JWTUtil jwtUtil) {
         this.customerService = customerService;
@@ -37,7 +35,6 @@ public class CustomerController {
         return customerService.getCustomerById(customerId);
     }
 
-
     @PostMapping
     public ResponseEntity<?> registerCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest){
         customerService.addCustomer(customerRegistrationRequest);
@@ -54,8 +51,8 @@ public class CustomerController {
 
     @PutMapping("/{customerId}")
     public void updateCustomer(
-                               @PathVariable("customerId") Integer id,
-                               @RequestBody CustomerRegistrationRequest customerRegistrationRequest){
+            @PathVariable("customerId") Integer id,
+            @RequestBody CustomerRegistrationRequest customerRegistrationRequest){
         customerService.updateCustomer(id, customerRegistrationRequest);
     }
 
@@ -64,14 +61,17 @@ public class CustomerController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
     public void uploadCustomerProfilePicture(
-                                @PathVariable("customerId") Integer customerId,
-                                @RequestParam("file") MultipartFile file){
+            @PathVariable("customerId") Integer customerId,
+            @RequestParam("file") MultipartFile file){
         customerService.uploadCustomerProfileImage(customerId, file);
     }
 
-    @GetMapping( value = "/{customerId}/profile-image")
+    @GetMapping(
+            value = "{customerId}/profile-image",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
     public byte[] getCustomerProfileImage(
-            @PathVariable("customerId") Integer customerId){
+            @PathVariable("customerId") Integer customerId) {
         return customerService.getCustomerProfileImage(customerId);
     }
 }
